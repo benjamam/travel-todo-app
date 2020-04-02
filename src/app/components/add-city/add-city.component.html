@@ -1,0 +1,21 @@
+<form class="add-city-form" [formGroup]="addCityForm" (ngSubmit)="addCity(addCityForm.value)">
+    <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput type="text" formControlName="name" id="name">
+        <mat-error *ngIf="hasError('name', 'required')">City is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>State</mat-label>
+        <mat-select formControlName="state" id="state">
+            <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                {{state.abbreviation}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Country</mat-label>
+        <input matInput formControlName="country" id="country">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add</button>
+</form>
+<p *ngIf="message">{{ message }}</p>

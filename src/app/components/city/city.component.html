@@ -1,0 +1,14 @@
+<div class="destination-container"><h1 class="destination-header">Destinations</h1><button mat-mini-fab (click)="addCity = !addCity">{{ addCity ? '-' : '+' }}</button></div>
+<app-add-city *ngIf="addCity"></app-add-city>
+<mat-divider></mat-divider>
+<div class="container" *ngFor="let city of cities">
+    <mat-card >
+        <mat-card-header routerLink="/destination/{{city.name}}" (click)="selectCity(city)">
+            <mat-card-title>{{ city.name }}</mat-card-title>
+            <mat-card-subtitle> {{ city.state }}{{ city.state && city.country ? ', ' : '' }}{{ city.country }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+            <button mat-button color="warn" (click)="deleteCity(city._id)">Delete</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

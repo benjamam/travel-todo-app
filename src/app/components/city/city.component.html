@@ -8,7 +8,7 @@
             <mat-card-subtitle> {{ city.state }}{{ city.state && city.country ? ', ' : '' }}{{ city.country }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-            <button mat-button color="warn" (click)="deleteCity(city._id)">Delete</button>
+            <button class="delete" mat-button color="warn" (click)="deleteCity(city._id)">Delete</button>
         </mat-card-actions>
     </mat-card>
 </div>

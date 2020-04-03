@@ -6,6 +6,7 @@ export interface Destination {
     cost?: string;
     description?: string;
     haveVisited: boolean;
+    markedForDelete: boolean;
 }
 
 export interface DestinationForCreation {

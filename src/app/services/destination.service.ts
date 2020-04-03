@@ -44,7 +44,7 @@ export class DestinationService {
   }
 
   addDestination(destination: DestinationForCreation): Observable<Destination> {
-    return this.http.post<DestinationForCreation>(this.DESTINATION_URL, JSON.stringify(destination), httpOptions)
+    return this.http.post<Destination>(this.DESTINATION_URL, JSON.stringify(destination), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

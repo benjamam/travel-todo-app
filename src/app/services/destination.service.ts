@@ -4,6 +4,7 @@ import { Observable, of, BehaviorSubject, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { BASE_TRAVEL_URL } from '../urls';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DestinationService {
-  private DESTINATION_URL = BASE_TRAVEL_URL + '/api/destinations';
+  private DESTINATION_URL = environment.api_url + '/api/destinations';
   public destinationSource: BehaviorSubject<Destination[]> = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) { }

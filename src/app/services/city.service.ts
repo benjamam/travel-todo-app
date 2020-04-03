@@ -4,6 +4,7 @@ import { catchError, retry, map, switchMap } from 'rxjs/operators';
 import { City, CityForCreation } from '../components/city/city';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { BASE_TRAVEL_URL } from '../urls';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CityService {
-  private CITY_URL = BASE_TRAVEL_URL + '/api/cities';
+  private CITY_URL = environment.api_url + '/api/cities';
   public citySource: BehaviorSubject<City[]> = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) {

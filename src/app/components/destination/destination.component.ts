@@ -19,7 +19,7 @@ export class DestinationComponent implements OnInit {
     this.cityId = this.route.snapshot.paramMap.get('id');
     this.destinationService.getDestinations(this.cityId);
     this.destinationService.destinationSource
-      .subscribe(d => this.destinations = this.sortArray(d));
+      .subscribe(d => this.destinations = this.formatDestinations(d));
   }
 
   markDestinationVisited(destination: Destination): void {
@@ -41,6 +41,15 @@ export class DestinationComponent implements OnInit {
 
   private sortArray(dests: Destination[]) {
     return dests.sort((d1, d2) => Number(d1.haveVisited) - Number(d2.haveVisited));
+  }
+
+  private formatDestinations(destinations: Destination[]) {
+    let dests = this.sortArray(destinations);
+    dests = dests.map(d => {
+      return { ...d,
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + d.name.replace(' ', '+') + '%2C' + d.location.replace(' ', '+') };
+    });
+    return dests;
   }
 
 }

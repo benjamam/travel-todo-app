@@ -7,6 +7,7 @@ export interface Destination {
     description?: string;
     haveVisited: boolean;
     markedForDelete: boolean;
+    mapsUrl?: string;
 }
 
 export interface DestinationForCreation {

@@ -22,6 +22,7 @@
             <mat-slide-toggle [checked]="dest.haveVisited" (click)="markDestinationVisited(dest)">
                 Visited
             </mat-slide-toggle>
+            <a mat-button href="{{dest.mapsUrl}}" target="_blank">Location</a>
             <button class="delete-btn" mat-button color="warn"
                 (click)="dest.markedForDelete = !dest.markedForDelete">Delete</button>
         </mat-card-actions>

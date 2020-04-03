@@ -3,7 +3,6 @@ import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry, map, switchMap } from 'rxjs/operators';
 import { City, CityForCreation } from '../components/city/city';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { BASE_TRAVEL_URL } from '../urls';
 import { environment } from 'src/environments/environment';
 
 const httpOptions = {

@@ -3,7 +3,6 @@ import { Destination, DestinationForCreation } from '../components/destination/d
 import { Observable, of, BehaviorSubject, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
-import { BASE_TRAVEL_URL } from '../urls';
 import { environment } from 'src/environments/environment';
 
 const httpOptions = {

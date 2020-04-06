@@ -4,6 +4,7 @@
 </div>
 <app-add-destination *ngIf="addDestination" [city]="cityId"></app-add-destination>
 <mat-divider></mat-divider>
+<ng-container *ngIf="!loading">
 <div class="container" *ngFor="let dest of destinations">
     <mat-card [ngClass]="{'visited' : dest.haveVisited}">
         <mat-card-header>
@@ -32,4 +33,8 @@
             <button mat-raised-button (click)="dest.markedForDelete = false">No</button>
         </mat-card-content>
     </mat-card>
+</div>
+</ng-container>
+<div class="container" *ngIf="loading">
+    <p>loading...</p>
 </div>

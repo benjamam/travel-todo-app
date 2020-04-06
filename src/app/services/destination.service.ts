@@ -21,9 +21,7 @@ export class DestinationService {
   constructor(private http: HttpClient) { }
 
   getDestinations(city: string): Observable<Destination[]> {
-    this.http.get<Destination[]>(this.DESTINATION_URL + '/' + city)
-      .subscribe(destinations => this.destinationSource.next(destinations));
-    return this.destinationSource.asObservable();
+    return this.http.get<Destination[]>(this.DESTINATION_URL + '/' + city);
   }
 
   updateDestinationVisited(destination: Destination): Observable<Destination> {

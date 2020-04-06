@@ -11,13 +11,17 @@ export class DestinationComponent implements OnInit {
   addDestination: boolean;
   destinations: Destination[];
   cityId: string;
+  loading = true;
 
   constructor(private route: ActivatedRoute, private destinationService: DestinationService) { }
 
   ngOnInit(): void {
     this.addDestination = false;
     this.cityId = this.route.snapshot.paramMap.get('id');
-    this.destinationService.getDestinations(this.cityId);
+    this.destinationService.getDestinations(this.cityId).subscribe(destinations => {
+      this.destinationService.destinationSource.next(destinations);
+      this.loading = false;
+    });
     this.destinationService.destinationSource
       .subscribe(d => this.destinations = this.formatDestinations(d));
   }

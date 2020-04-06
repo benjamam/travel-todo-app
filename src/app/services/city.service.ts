@@ -22,9 +22,7 @@ export class CityService {
   }
 
   getCities(): Observable<City[]> {
-    this.http.get<City[]>(this.CITY_URL)
-      .subscribe(cities => this.citySource.next(cities));
-    return this.citySource.asObservable();
+    return this.http.get<City[]>(this.CITY_URL);
   }
 
   addCity(cityForCreation: CityForCreation): Observable<City> {

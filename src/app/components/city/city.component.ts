@@ -12,18 +12,17 @@ import { DestinationService } from 'src/app/services/destination.service';
 })
 export class CityComponent implements OnInit {
   addCity: boolean;
-  cities: City[];
+  cities$: Observable<City[]>;
   loading = true;
 
   constructor(private cityService: CityService, private destinationService: DestinationService) { }
 
   ngOnInit(): void {
     this.addCity = false;
-    this.cityService.getCities().subscribe(cities => {
+    this.cityService.getCities().subscribe(resp => {
       this.loading = false;
-      this.cityService.citySource.next(cities);
     });
-    this.cityService.citySource.subscribe(cities => this.cities = cities);
+    this.cities$ = this.cityService.citySource$;
     this.destinationService.destinationSource.next([]);
   }
 
@@ -32,10 +31,7 @@ export class CityComponent implements OnInit {
 
   deleteCity(id: string): void {
     this.cityService.deleteCity(id)
-      .subscribe(id =>
-        this.cityService.citySource.next(this.cityService.citySource.value.filter(city => city._id !== id)
-        )
-      );
+      .subscribe();
   }
 
 

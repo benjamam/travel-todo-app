@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, retry, map, switchMap } from 'rxjs/operators';
+import { catchError, retry, map, switchMap, tap } from 'rxjs/operators';
 import { City, CityForCreation } from '../components/city/city';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -16,13 +16,17 @@ const httpOptions = {
 })
 export class CityService {
   private CITY_URL = environment.api_url + '/api/cities';
-  public citySource: BehaviorSubject<City[]> = new BehaviorSubject([]);
+  private citySource: BehaviorSubject<City[]> = new BehaviorSubject([]);
+  public citySource$ = this.citySource.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
   getCities(): Observable<City[]> {
-    return this.http.get<City[]>(this.CITY_URL);
+    return this.http.get<City[]>(this.CITY_URL)
+      .pipe(
+        tap(citiesResp => this.citySource.next(citiesResp))
+      );
   }
 
   addCity(cityForCreation: CityForCreation): Observable<City> {
@@ -41,6 +45,7 @@ export class CityService {
   deleteCity(id: string): Observable<any> {
     return this.http.delete(this.CITY_URL + '/' + id, httpOptions).
       pipe(
+        tap(() => this.citySource.next(this.citySource.value.filter(c => c._id !== id))),
         catchError(this.handleError)
       );
 

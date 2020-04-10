@@ -5,7 +5,7 @@
 <app-add-city *ngIf="addCity"></app-add-city>
 <mat-divider></mat-divider>
 <ng-container *ngIf="!loading">
-    <div class="container" *ngFor="let city of cities">
+    <div class="container" *ngFor="let city of cities$ | async">
         <mat-card>
             <mat-card-header routerLink="/destination/{{city.name}}" (click)="selectCity(city)">
                 <mat-card-title>{{ city.name }}</mat-card-title>

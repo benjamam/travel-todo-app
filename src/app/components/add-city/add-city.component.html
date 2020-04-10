@@ -1,7 +1,7 @@
 <form class="add-city-form" [formGroup]="addCityForm" (ngSubmit)="addCity(addCityForm.value)">
     <mat-form-field>
         <mat-label>City</mat-label>
-        <input matInput type="text" formControlName="name" id="name">
+        <input matInput type="text" formControlName="name" id="name" autofocus>
         <mat-error *ngIf="hasError('name', 'required')">City is required</mat-error>
     </mat-form-field>
     <mat-form-field>

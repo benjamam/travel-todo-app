@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Destination } from './destination';
 import { DestinationService } from '../../services/destination.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.component.html',
@@ -9,7 +11,7 @@ import { DestinationService } from '../../services/destination.service';
 })
 export class DestinationComponent implements OnInit {
   addDestination: boolean;
-  destinations: Destination[];
+  destinations$: Observable<Destination[]>;
   cityId: string;
   loading = true;
 
@@ -19,28 +21,20 @@ export class DestinationComponent implements OnInit {
     this.addDestination = false;
     this.cityId = this.route.snapshot.paramMap.get('id');
     this.destinationService.getDestinations(this.cityId).subscribe(destinations => {
-      this.destinationService.destinationSource.next(destinations);
       this.loading = false;
     });
-    this.destinationService.destinationSource
-      .subscribe(d => this.destinations = this.formatDestinations(d));
+    this.destinations$ = this.destinationService.destinationSource$
+      .pipe(map(destinations => this.formatDestinations(destinations)));
   }
 
   markDestinationVisited(destination: Destination): void {
     this.destinationService.updateDestinationVisited(destination)
-      .subscribe(dest => {
-        const updatedDestList: Destination[] = this.destinationService.destinationSource.value
-          .map(d => d._id === dest._id ? { ...d, haveVisited: dest.haveVisited } : d);
-        this.destinationService.destinationSource.next(updatedDestList);
-      });
+      .subscribe();
   }
 
   deleteDestination(id: string): void {
     this.destinationService.deleteDestination(id)
-      .subscribe(id =>
-        this.destinationService.destinationSource.next(
-          this.destinationService.destinationSource.value.filter(d => d._id !== id)
-        ));
+      .subscribe();
   }
 
   private sortArray(dests: Destination[]) {
@@ -55,5 +49,4 @@ export class DestinationComponent implements OnInit {
     });
     return dests;
   }
-
 }

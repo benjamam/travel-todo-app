@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DestinationForCreation } from '../destination/destination';
 import { DestinationService } from 'src/app/services/destination.service';
 import { LocationService } from 'src/app/services/location.service';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-add-destination',
@@ -46,7 +47,6 @@ export class AddDestinationComponent implements OnInit {
     this.destinationService.addDestination(newDestination)
       .subscribe(d => {
         if (d) {
-          this.destinationService.addDestinationToState(d);
           this.message = `${d.name} added successfully`;
           this.addDestinationForm.reset();
         } else {
@@ -58,5 +58,4 @@ export class AddDestinationComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) => {
     return this.addDestinationForm.controls[controlName].hasError(errorName);
   }
-
 }

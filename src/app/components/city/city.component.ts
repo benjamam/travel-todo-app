@@ -23,7 +23,7 @@ export class CityComponent implements OnInit {
       this.loading = false;
     });
     this.cities$ = this.cityService.citySource$;
-    this.destinationService.destinationSource.next([]);
+    this.destinationService.clearDestinationState();
   }
 
   selectCity(city: City): void {

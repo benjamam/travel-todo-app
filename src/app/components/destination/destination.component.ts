@@ -49,9 +49,9 @@ export class DestinationComponent implements OnInit {
 
   private formatDestinations(destinations: Destination[]) {
     let dests = this.sortArray(destinations);
-    dests = dests.map(d => {
-      return { ...d,
-        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + d.name.replace(' ', '+') + '%2C' + d.location.replace(' ', '+') };
+    dests = dests.map(d => d.mapsUrl ? d : {
+      ...d,
+      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + d.name.replace(' ', '+') + '%2C' + d.location.replace(' ', '+')
     });
     return dests;
   }

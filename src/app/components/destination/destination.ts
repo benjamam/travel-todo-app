@@ -17,4 +17,5 @@ export interface DestinationForCreation {
     cost?: string;
     website: string;
     haveVisited: boolean;
+    mapsUrl: string;
 }

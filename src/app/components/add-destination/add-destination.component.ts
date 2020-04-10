@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DestinationForCreation } from '../destination/destination';
 import { DestinationService } from 'src/app/services/destination.service';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-add-destination',
@@ -13,7 +14,7 @@ export class AddDestinationComponent implements OnInit {
   addDestinationForm: FormGroup;
   message: string;
 
-  constructor(private destinationService: DestinationService) { }
+  constructor(private destinationService: DestinationService, private locationService: LocationService) { }
 
   ngOnInit(): void {
     this.addDestinationForm = new FormGroup({
@@ -37,8 +38,10 @@ export class AddDestinationComponent implements OnInit {
       description: addDestinationFormValue.description,
       cost: addDestinationFormValue.cost,
       website: addDestinationFormValue.website,
-      haveVisited: false
+      haveVisited: false,
+      mapsUrl: ''
     };
+    newDestination.mapsUrl = this.locationService.formatLocation(newDestination);
 
     this.destinationService.addDestination(newDestination)
       .subscribe(d => {

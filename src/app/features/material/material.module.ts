@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -24,7 +26,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTableModule,
     MatSelectModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   bootstrap: [MaterialModule]
 })

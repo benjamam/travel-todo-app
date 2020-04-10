@@ -10,7 +10,7 @@ export class LocationService {
 
   formatLocation(destination: DestinationForCreation): string {
     return 'https://www.google.com/maps/search/?api=1&query='
-      + destination.name.replace(' ', '+')
+      + destination.name.split(' ').join('+')
       + '%2C'
       + destination.location.replace(' ', '+');
   }

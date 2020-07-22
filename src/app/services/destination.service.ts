@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Destination, DestinationForCreation } from '../components/destination/destination';
 import { Observable, of, BehaviorSubject, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { retry, catchError, tap } from 'rxjs/operators';
+import { retry, catchError, tap, map, filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 const httpOptions = {
@@ -64,6 +64,12 @@ export class DestinationService {
         }),
         catchError(this.handleError)
       );
+  }
+
+  getDestinationsBySearch(searchParam: string): Observable<Destination[]> {
+    return this.destinationSource$.pipe(
+      map(destinations => destinations.filter(d => d.name.toLowerCase().includes(searchParam.toLowerCase())))
+    );
   }
 
   private addDestinationToState(destination: Destination): void {

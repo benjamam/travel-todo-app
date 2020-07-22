@@ -7,6 +7,7 @@ a {
 }
 .header-container{
     padding: 5px 21px;
+    position: relative;
 }
 .visited {
     background-color: rgba(206, 214, 224, 0.3);
@@ -26,6 +27,12 @@ a {
 }
 .mat-card-content {
     margin-bottom: 10px;
+}
+
+.search{
+    position: absolute;
+    right: 3%;
+    width: 150px;
 }
 
 ::ng-deep .mat-card-header-text {

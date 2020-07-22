@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Destination } from './destination';
 import { DestinationService } from '../../services/destination.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.component.html',
@@ -14,6 +14,7 @@ export class DestinationComponent implements OnInit {
   destinations$: Observable<Destination[]>;
   cityId: string;
   loading = true;
+  searchVal = '';
 
   constructor(private route: ActivatedRoute, private destinationService: DestinationService) { }
 
@@ -24,7 +25,9 @@ export class DestinationComponent implements OnInit {
       this.loading = false;
     });
     this.destinations$ = this.destinationService.destinationSource$
-      .pipe(map(destinations => this.formatDestinations(destinations)));
+      .pipe(
+        map(destinations => this.formatDestinations(destinations))
+      );
   }
 
   markDestinationVisited(destination: Destination): void {
@@ -37,6 +40,13 @@ export class DestinationComponent implements OnInit {
       .subscribe();
   }
 
+  search(event: KeyboardEvent): void {
+    this.searchVal = (event.target as HTMLInputElement).value.toLowerCase().trim();
+  
+    this.destinations$ = this.destinationService.getDestinationsBySearch(this.searchVal).pipe(
+      map(destinations => this.formatDestinations(destinations))
+    );
+  }
   private sortArray(dests: Destination[]) {
     return dests.sort((d1, d2) => Number(d1.haveVisited) - Number(d2.haveVisited));
   }

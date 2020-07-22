@@ -1,11 +1,15 @@
 <div class="header-container">
-    <h1 class="city-header">{{ cityId }}</h1><button mat-mini-fab
-        (click)="addDestination = !addDestination">{{ addDestination ? '-' : '+' }}</button>
+    <h1 class="city-header">{{ cityId }}</h1>
+    <button mat-mini-fab (click)="addDestination = !addDestination">{{ addDestination ? '-' : '+' }}</button>
+    <mat-form-field class="search">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput type="search" placeholder="search places" (keyup)="search($event)">
+    </mat-form-field>
 </div>
 <app-add-destination *ngIf="addDestination" [city]="cityId"></app-add-destination>
 <mat-divider></mat-divider>
 <ng-container *ngIf="!loading">
-    <div class="container" *ngIf="(destinations$ | async).length === 0">
+    <div class="container" *ngIf="(destinations$ | async).length === 0 && searchVal === ''">
         <p>Add a destination!</p>
     </div>
     <div class="container" *ngFor="let dest of destinations$ | async">
@@ -41,4 +45,7 @@
 </ng-container>
 <div class="container" *ngIf="loading">
     <p>loading...</p>
+</div>
+<div class="container" *ngIf="!loading && searchVal !== '' && (destinations$ | async).length === 0">
+    <p>no results found for: {{ searchVal }}</p>
 </div>

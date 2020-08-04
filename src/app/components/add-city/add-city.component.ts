@@ -5,7 +5,7 @@ import { CityForCreation } from '../city/city';
 import { CityService } from 'src/app/services/city.service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-add-city',
   templateUrl: './add-city.component.html',

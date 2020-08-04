@@ -5,7 +5,7 @@ import { Observable, pipe } from 'rxjs';
 import { DestinationService } from 'src/app/services/destination.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-city',
   templateUrl: './city.component.html',

@@ -6,7 +6,7 @@ import { LocationService } from 'src/app/services/location.service';
 import { MatInput } from '@angular/material/input';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-add-destination',
   templateUrl: './add-destination.component.html',

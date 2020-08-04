@@ -6,7 +6,7 @@ import { Observable, pipe } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.component.html',
@@ -45,7 +45,7 @@ export class DestinationComponent implements OnInit {
 
   search(event: KeyboardEvent): void {
     this.searchVal = (event.target as HTMLInputElement).value.toLowerCase().trim();
-  
+
     this.destinations$ = this.destinationService.getDestinationsBySearch(this.searchVal).pipe(
       map(destinations => this.formatDestinations(destinations))
     );

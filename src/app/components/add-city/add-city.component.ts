@@ -3,7 +3,9 @@ import { STATE_LIST, StateList } from 'src/app/constants/states';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CityForCreation } from '../city/city';
 import { CityService } from 'src/app/services/city.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-add-city',
   templateUrl: './add-city.component.html',

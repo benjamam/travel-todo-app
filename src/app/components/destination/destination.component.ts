@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Destination } from './destination';
 import { DestinationService } from '../../services/destination.service';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
+import { UntilDestroy } from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Component({
   selector: 'app-destination',
   templateUrl: './destination.component.html',

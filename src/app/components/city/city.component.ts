@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { City } from './city';
 import { CityService } from 'src/app/services/city.service';
-import { Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
 import { DestinationService } from 'src/app/services/destination.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-city',
   templateUrl: './city.component.html',
@@ -31,8 +32,8 @@ export class CityComponent implements OnInit {
 
   deleteCity(id: string): void {
     this.cityService.deleteCity(id)
-      .subscribe();
+      .subscribe(
+        pipe(untilDestroyed(this))
+      );
   }
-
-
 }

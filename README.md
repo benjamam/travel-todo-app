@@ -1,5 +1,12 @@
 # TravelTodoApp
 
+You can view this app live here: https://traveltodo.herokuapp.com/
+
+It was created for me and my girlfriend, Christy, to document new places we wanted to visit. Feel free to add any of your own suggestions! 
+
+I have a CI/CD pipeline set up to Heroku so that any changes automatically kick off a Heroku build. It is powered by a Node/Express MongoDB backend that is also hosted on Heroku. However, I have this app private as it contains some sensitive keys!
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
 ## Development server
